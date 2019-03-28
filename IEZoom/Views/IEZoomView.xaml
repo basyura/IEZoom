@@ -1,0 +1,55 @@
+﻿<ev:ViewBase x:Class="IEZoom.IEZoomView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ev="clr-namespace:Eleve;assembly=Eleve"
+        xmlns:vm="clr-namespace:IEZoom.ViewModels"
+        Title="MainWindow" Height="350" Width="525">
+    
+    <ev:ViewBase.DataContext>
+        <vm:IEZoomViewModel />
+    </ev:ViewBase.DataContext>
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="ContentRendered">
+            <ev:Execute Action="Initialize" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Refresh">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <ev:Execute Action="Refresh" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <TextBlock Text="Percent : " Margin="10 0 0 0"/>
+            <TextBox Text="{Binding Percent}" Width="50"/>
+        </StackPanel>
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding InternetExplorers}" 
+                                                           SelectedItem="{Binding SelectedItem}" >
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Change">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="  ">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <ev:Execute Action="Zoom" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="url" Binding="{Binding Url}" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</ev:ViewBase>
