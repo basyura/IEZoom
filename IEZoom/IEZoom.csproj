@@ -58,11 +58,11 @@
     <None Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </None>
+    <Compile Include="Actions\IEZoom\Initialize.cs" />
     <Compile Include="Actions\IEZoom\Zoom.cs" />
     <Compile Include="Models\Ie.cs" />
     <Compile Include="ViewModels\IEZoomViewModel.cs" />
     <Compile Include="Actions\IEZoom\IEZoomActionBase.cs" />
-    <Compile Include="Actions\IEZoom\Initialize.cs" />
     <Compile Include="Actions\IEZoom\Refresh.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Page Include="Views\IEZoomView.xaml">

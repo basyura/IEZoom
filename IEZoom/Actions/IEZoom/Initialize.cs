@@ -10,6 +10,8 @@ namespace IEZoom.Actions.IEZoom
     {
         public override Task<ActionResult> Execute(object sender, EventArgs evnt, object parameter)
         {
+            ExecuteCommand("Refresh");
+
             return SuccessTask;
         }
     }

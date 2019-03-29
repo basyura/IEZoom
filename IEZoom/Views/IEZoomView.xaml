@@ -4,7 +4,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ev="clr-namespace:Eleve;assembly=Eleve"
         xmlns:vm="clr-namespace:IEZoom.ViewModels"
-        Title="MainWindow" Height="350" Width="525">
+        Title="IEZoom" Height="350" Width="525">
     
     <ev:ViewBase.DataContext>
         <vm:IEZoomViewModel />
@@ -12,7 +12,7 @@
     
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="ContentRendered">
-            <ev:Execute Action="Initialize" />
+            <ev:Execute Action="Refresh" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     
@@ -21,8 +21,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <Button Content="Refresh">
+        <StackPanel Orientation="Horizontal" Margin="5 5 0 5">
+            <Button Content="Refresh" Padding="5 0 5 0">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <ev:Execute Action="Refresh" />
@@ -30,12 +30,12 @@
                 </i:Interaction.Triggers>
             </Button>
             <TextBlock Text="Percent : " Margin="10 0 0 0"/>
-            <TextBox Text="{Binding Percent}" Width="50"/>
+            <TextBox Text="{Binding Percent}" Width="30" TextAlignment="Right"/>
         </StackPanel>
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding InternetExplorers}" 
                                                            SelectedItem="{Binding SelectedItem}" >
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Change">
+                <DataGridTemplateColumn Header="Zoom">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="  ">
@@ -48,7 +48,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="url" Binding="{Binding Url}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Url" Binding="{Binding Url}" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

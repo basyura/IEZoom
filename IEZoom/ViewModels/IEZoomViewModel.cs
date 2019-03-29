@@ -16,7 +16,7 @@ namespace IEZoom.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        private int _Percent = 80;
+        private int _Percent = 82;
         public int Percent
         {
             get { return _Percent; }
