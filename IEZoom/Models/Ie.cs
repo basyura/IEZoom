@@ -15,12 +15,22 @@ namespace IEZoom.Models
         {
             _ie = ie;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Url
+        /// <summary></summary>
+        public string Url { get { return _ie.LocationURL; } }
+        /// <summary></summary>
+        public int HWND
         {
-            get { return _ie.LocationURL; }
+            get
+            {
+                try
+                {
+                    return _ie.HWND;
+                }
+                catch
+                {
+                    return -1;
+                }
+            }
         }
         /// <summary>
         /// 

@@ -21,19 +21,29 @@
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Margin="5 5 0 5">
-            <Button Content="Refresh" Padding="5 0 5 0">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <ev:Execute Action="Refresh" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Button>
-            <TextBlock Text="Percent : " Margin="10 0 0 0" />
-            <TextBox Text="{Binding Percent}" Width="30" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" />
-            <TextBlock Text="Filter : " Margin="10 0 0 0" />
-            <TextBox Text="{Binding Filter}" Width="200" InputMethod.IsInputMethodEnabled="False" />
-        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="5 5 0 5" VerticalAlignment="Center">
+                <Button Content="Refresh" Padding="5 0 5 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <ev:Execute Action="Refresh" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <TextBlock Text="Percent : " Margin="10 0 0 0" />
+                <TextBox Text="{Binding Percent}" Width="30" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" />
+                <TextBlock Text="Filter : " Margin="10 0 0 0" />
+                <TextBox Text="{Binding Filter}" Width="200" InputMethod.IsInputMethodEnabled="False" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock Text="AutoZoom : " />
+                <CheckBox IsChecked="{Binding IsAutoZoom}" Margin="0 0 5 0" />
+            </StackPanel>
+        </Grid>
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding InternetExplorers}" 
                                                            SelectedItem="{Binding SelectedItem}" >
             <DataGrid.Columns>

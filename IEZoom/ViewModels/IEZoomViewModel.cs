@@ -1,12 +1,42 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
+using System.Windows.Threading;
 using Eleve;
 using IEZoom.Models;
+using mshtml;
 using SHDocVw;
 
 namespace IEZoom.ViewModels
 {
     public class IEZoomViewModel : ViewModelBase
     {
+        /// <summary></summary>
+        private DispatcherTimer _timer = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEZoomViewModel()
+        {
+            _timer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromSeconds(10)
+            };
+            _timer.Tick += (s, e) =>
+            {
+                if (!IsAutoZoom)
+                {
+                    return;
+                }
+
+                ExecuteCommand("AutoZoom");
+            };
+            _timer.Start();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public ObservableCollection<Ie> InternetExplorers { get; } = new ObservableCollection<Ie>();
         /// <summary>
         /// 
         /// </summary>
@@ -47,14 +77,48 @@ namespace IEZoom.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        public ObservableCollection<Ie> InternetExplorers { get; } = new ObservableCollection<Ie>();
+        private bool _IsAutoZoom = false;
+        public bool IsAutoZoom
+        {
+            get { return _IsAutoZoom; }
+            set
+            {
+                _IsAutoZoom = value;
+                RaisePropertyChanged();
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="ie"></param>
-        public void Add(InternetExplorer ie)
+        public void Refresh()
         {
-            InternetExplorers.Add(new Ie(ie));
+            InternetExplorers.Clear();
+
+            Regex filter = null;
+            if (!string.IsNullOrEmpty(Filter))
+            {
+                filter = new Regex(Filter);
+            }
+
+            foreach (object window in new ShellWindows())
+            {
+                if (!(window is InternetExplorer ie))
+                {
+                    continue;
+                }
+
+                if (!(ie.Document is HTMLDocument doc))
+                {
+                    continue;
+                }
+
+                if (filter != null && !filter.IsMatch(ie.LocationURL))
+                {
+                    continue;
+                }
+
+                InternetExplorers.Add(new Ie(ie));
+            }
         }
     }
 }

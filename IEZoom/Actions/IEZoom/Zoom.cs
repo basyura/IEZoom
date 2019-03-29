@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Eleve;
 using IEZoom.Models;
-using SHDocVw;
 
 namespace IEZoom.Actions.IEZoom
 {
