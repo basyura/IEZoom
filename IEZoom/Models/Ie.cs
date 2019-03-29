@@ -1,4 +1,7 @@
-﻿using SHDocVw;
+﻿using System;
+using System.IO;
+using System.Linq;
+using SHDocVw;
 
 namespace IEZoom.Models
 {
@@ -27,7 +30,9 @@ namespace IEZoom.Models
         /// <param name="percent"></param>
         public void Zoom(int percent)
         {
-            _ie.Document.body.runtimeStyle.Zoom = percent + "%";
+            Object pvaIn = percent;
+            Object pvaOut = null;
+            _ie.ExecWB((SHDocVw.OLECMDID)63, SHDocVw.OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, ref pvaIn, ref pvaOut);
         }
     }
 }
