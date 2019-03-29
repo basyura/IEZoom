@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using System.Text;
 using System.Threading.Tasks;
 using Eleve;
-using IEZoom.Models;
+using mshtml;
 using SHDocVw;
-using Shell32;
 
 namespace IEZoom.Actions.IEZoom
 {
@@ -15,38 +13,31 @@ namespace IEZoom.Actions.IEZoom
         {
             ViewModel.InternetExplorers.Clear();
 
-            Shell shell = new Shell();
-            dynamic windows = shell.Windows();
-
             Regex filter = null;
             if (!string.IsNullOrEmpty(ViewModel.Filter))
             {
                 filter = new Regex(ViewModel.Filter);
             }
             
-            
-
-            foreach (object window in windows)
+            foreach (object window in new ShellWindows())
             {
-                InternetExplorer ie = window as SHDocVw.InternetExplorer;
+                InternetExplorer ie = window as InternetExplorer;
                 if (ie == null)
                 {
                     continue;
                 }
 
-                string url = ie.LocationURL;
-                if (!url.StartsWith("http"))
+                if (!(ie.Document is HTMLDocument doc))
                 {
                     continue;
                 }
 
-                if (filter != null && !filter.IsMatch(url))
+                if (filter != null && !filter.IsMatch(ie.LocationURL))
                 {
                     continue;
                 }
 
-                ViewModel.InternetExplorers.Add(new Ie(ie));
-
+                ViewModel.Add(ie);
             }
 
             return SuccessTask;

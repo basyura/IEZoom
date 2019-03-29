@@ -4,7 +4,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ev="clr-namespace:Eleve;assembly=Eleve"
         xmlns:vm="clr-namespace:IEZoom.ViewModels"
-        Title="IEZoom" Height="350" Width="650">
+        Title="IEZoom" Height="200" Width="650">
     
     <ev:ViewBase.DataContext>
         <vm:IEZoomViewModel />

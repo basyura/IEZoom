@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Eleve;
 using IEZoom.Models;
+using SHDocVw;
 
 namespace IEZoom.ViewModels
 {
@@ -47,5 +48,13 @@ namespace IEZoom.ViewModels
         /// 
         /// </summary>
         public ObservableCollection<Ie> InternetExplorers { get; } = new ObservableCollection<Ie>();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ie"></param>
+        public void Add(InternetExplorer ie)
+        {
+            InternetExplorers.Add(new Ie(ie));
+        }
     }
 }
