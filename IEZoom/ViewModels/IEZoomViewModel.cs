@@ -1,13 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using Eleve;
 using IEZoom.Models;
-using SHDocVw;
 
 namespace IEZoom.ViewModels
 {
@@ -24,9 +17,9 @@ namespace IEZoom.ViewModels
                  RaisePropertyChanged();
             }
         }
-
-
-        /// <summary></summary>
+        /// <summary>
+        /// 
+        /// </summary>
         private Ie _SelectedItem;
         public Ie SelectedItem
         {
@@ -34,6 +27,19 @@ namespace IEZoom.ViewModels
             set
             {
                 _SelectedItem = value;
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private string _Filter = "";
+        public string Filter
+        {
+            get { return _Filter; }
+            set
+            {
+                _Filter = value;
                 RaisePropertyChanged();
             }
         }

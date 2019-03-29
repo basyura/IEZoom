@@ -31,6 +31,8 @@
             </Button>
             <TextBlock Text="Percent : " Margin="10 0 0 0"/>
             <TextBox Text="{Binding Percent}" Width="30" TextAlignment="Right"/>
+            <TextBlock Text="Filter : " Margin="10 0 0 0" />
+            <TextBox Text="{Binding Filter}" Width="200" />
         </StackPanel>
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding InternetExplorers}" 
                                                            SelectedItem="{Binding SelectedItem}" >

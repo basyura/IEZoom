@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text.RegularExpressions;
+using System.Text;
 using System.Threading.Tasks;
 using Eleve;
 using IEZoom.Models;
@@ -16,6 +18,14 @@ namespace IEZoom.Actions.IEZoom
             Shell shell = new Shell();
             dynamic windows = shell.Windows();
 
+            Regex filter = null;
+            if (!string.IsNullOrEmpty(ViewModel.Filter))
+            {
+                filter = new Regex(ViewModel.Filter);
+            }
+            
+            
+
             foreach (object window in windows)
             {
                 InternetExplorer ie = window as SHDocVw.InternetExplorer;
@@ -30,11 +40,12 @@ namespace IEZoom.Actions.IEZoom
                     continue;
                 }
 
-                /*
-                ie.Document.body.runtimeStyle.Zoom = "50%";
-                */
-                ViewModel.InternetExplorers.Add(new Ie(ie));
+                if (filter != null && !filter.IsMatch(url))
+                {
+                    continue;
+                }
 
+                ViewModel.InternetExplorers.Add(new Ie(ie));
 
             }
 
