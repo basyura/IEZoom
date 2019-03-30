@@ -44,6 +44,9 @@
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -68,11 +71,14 @@
     <Compile Include="Actions\IEZoom\Initialize.cs" />
     <Compile Include="Actions\IEZoom\Zoom.cs" />
     <Compile Include="Models\Ie.cs" />
+    <Compile Include="Models\Settings.cs" />
     <Compile Include="ViewModels\IEZoomViewModel.cs" />
     <Compile Include="Actions\IEZoom\IEZoomActionBase.cs" />
     <Compile Include="Actions\IEZoom\Refresh.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <Page Include="Views\IEZoomView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

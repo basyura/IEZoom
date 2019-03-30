@@ -12,26 +12,52 @@ namespace IEZoom.ViewModels
     public class IEZoomViewModel : ViewModelBase
     {
         /// <summary></summary>
-        private DispatcherTimer _timer = null;
+        private Settings _settings;
+        /// <summary></summary>
+        private DispatcherTimer _timer;
         /// <summary>
         /// 
         /// </summary>
         public IEZoomViewModel()
         {
+            _settings = Settings.Load();
+
             _timer = new DispatcherTimer()
             {
                 Interval = TimeSpan.FromSeconds(10)
             };
             _timer.Tick += (s, e) =>
             {
-                if (!IsAutoZoom)
+                if (IsAutoZoom)
                 {
-                    return;
+                    ExecuteCommand("AutoZoom");
                 }
-
-                ExecuteCommand("AutoZoom");
             };
             _timer.Start();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Percent
+        {
+            get { return _settings.Percent; }
+            set { SetProperty(ref _settings.Percent, value, () => { _settings.IsChanged = true; }); }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Filter
+        {
+            get { return _settings.Filter; }
+            set { SetProperty(ref _settings.Filter, value, () => { _settings.IsChanged = true; }); }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsAutoZoom
+        {
+            get { return _settings.IsAutoZoom; }
+            set { SetProperty(ref _settings.IsAutoZoom, value, () => { _settings.IsChanged = true; }); }
         }
         /// <summary>
         /// 
@@ -40,38 +66,11 @@ namespace IEZoom.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        private int _Percent = 82;
-        public int Percent
-        {
-            get { return _Percent; }
-            set { SetProperty(ref _Percent, value); }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
         private Ie _SelectedItem;
         public Ie SelectedItem
         {
             get { return _SelectedItem; }
             set { SetProperty(ref _SelectedItem, value); }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        private string _Filter = "";
-        public string Filter
-        {
-            get { return _Filter; }
-            set { SetProperty(ref _Filter, value); }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        private bool _IsAutoZoom = false;
-        public bool IsAutoZoom
-        {
-            get { return _IsAutoZoom; }
-            set { SetProperty(ref _IsAutoZoom, value); }
         }
         /// <summary>
         /// 
@@ -111,6 +110,18 @@ namespace IEZoom.ViewModels
                 {
                     // 起動中にぶつかると COM エラーが出る
                 }
+            }
+
+            SaveSettings();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SaveSettings()
+        {
+            if (_settings.IsChanged)
+            {
+                _settings.Save();
             }
         }
     }

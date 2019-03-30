@@ -12,7 +12,7 @@
     
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="ContentRendered">
-            <ev:Execute Action="Refresh" />
+            <ev:Execute Action="Initialize" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     
