@@ -44,9 +44,7 @@ namespace IEZoom.ViewModels
         public int Percent
         {
             get { return _Percent; }
-            set { _Percent = value;
-                 RaisePropertyChanged();
-            }
+            set { SetProperty(ref _Percent, value); }
         }
         /// <summary>
         /// 
@@ -55,11 +53,7 @@ namespace IEZoom.ViewModels
         public Ie SelectedItem
         {
             get { return _SelectedItem; }
-            set
-            {
-                _SelectedItem = value;
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref _SelectedItem, value); }
         }
         /// <summary>
         /// 
@@ -68,11 +62,7 @@ namespace IEZoom.ViewModels
         public string Filter
         {
             get { return _Filter; }
-            set
-            {
-                _Filter = value;
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref _Filter, value); }
         }
         /// <summary>
         /// 
@@ -81,11 +71,7 @@ namespace IEZoom.ViewModels
         public bool IsAutoZoom
         {
             get { return _IsAutoZoom; }
-            set
-            {
-                _IsAutoZoom = value;
-                RaisePropertyChanged();
-            }
+            set { SetProperty(ref _IsAutoZoom, value); }
         }
         /// <summary>
         /// 
@@ -102,22 +88,29 @@ namespace IEZoom.ViewModels
 
             foreach (object window in new ShellWindows())
             {
-                if (!(window is InternetExplorer ie))
+                try
                 {
-                    continue;
-                }
+                    if (!(window is InternetExplorer ie))
+                    {
+                        continue;
+                    }
 
-                if (!(ie.Document is HTMLDocument doc))
+                    if (!(ie.Document is HTMLDocument doc))
+                    {
+                        continue;
+                    }
+
+                    if (filter != null && !filter.IsMatch(ie.LocationURL))
+                    {
+                        continue;
+                    }
+
+                    InternetExplorers.Add(new Ie(ie));
+                }
+                catch
                 {
-                    continue;
+                    // 起動中にぶつかると COM エラーが出る
                 }
-
-                if (filter != null && !filter.IsMatch(ie.LocationURL))
-                {
-                    continue;
-                }
-
-                InternetExplorers.Add(new Ie(ie));
             }
         }
     }
