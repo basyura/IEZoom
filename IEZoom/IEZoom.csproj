@@ -49,6 +49,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -64,14 +66,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="App.xaml.cs">
+    <Compile Include="Actions\IEZoom\Closing.cs" />
+    <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-    </None>
+    </Compile>
     <Compile Include="Actions\IEZoom\AutoZoom.cs" />
     <Compile Include="Actions\IEZoom\Initialize.cs" />
     <Compile Include="Actions\IEZoom\Zoom.cs" />
     <Compile Include="Models\Ie.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="NotifyIconWrapper.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NotifyIconWrapper.Designer.cs">
+      <DependentUpon>NotifyIconWrapper.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\IEZoomViewModel.cs" />
     <Compile Include="Actions\IEZoom\IEZoomActionBase.cs" />
     <Compile Include="Actions\IEZoom\Refresh.cs" />
@@ -114,6 +123,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="IEZoom.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NotifyIconWrapper.resx">
+      <DependentUpon>NotifyIconWrapper.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
