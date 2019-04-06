@@ -49,6 +49,11 @@ namespace IEZoom
         /// <param name="e"></param>
         private void menuItem_Open_Click(object sender, EventArgs e)
         {
+            var ev = e as System.Windows.Forms.MouseEventArgs;
+            if (ev != null && ev.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                return;
+            }
             View.Visibility = Visibility.Visible;
         }
         /// <summary>
