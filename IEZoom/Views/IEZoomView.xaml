@@ -44,7 +44,7 @@
                 <TextBlock Text="Percent : " Margin="10 0 0 0" />
                 <TextBox Text="{Binding Percent}" Width="30" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" />
                 <TextBlock Text="Filter : " Margin="10 0 0 0" />
-                <TextBox Text="{Binding Filter}" Width="200" InputMethod.IsInputMethodEnabled="False" />
+                <TextBox Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}" Width="200" InputMethod.IsInputMethodEnabled="False" />
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <TextBlock Text="AutoZoom : " />
