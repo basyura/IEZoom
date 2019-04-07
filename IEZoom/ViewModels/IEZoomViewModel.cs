@@ -38,6 +38,22 @@ namespace IEZoom.ViewModels
         /// <summary>
         /// 
         /// </summary>
+        public double Width
+        {
+            get { return _settings.Width; }
+            set { SetProperty(ref _settings.Width, value, () => { _settings.IsChanged = true; }); }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public double Height
+        {
+            get { return _settings.Height; }
+            set { SetProperty(ref _settings.Height, value, () => { _settings.IsChanged = true; }); }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         public int Percent
         {
             get { return _settings.Percent; }

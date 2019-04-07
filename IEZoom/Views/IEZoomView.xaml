@@ -4,7 +4,11 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ev="clr-namespace:Eleve;assembly=Eleve"
         xmlns:vm="clr-namespace:IEZoom.ViewModels"
-        Title="IEZoom" Height="200" Width="650">
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        mc:Ignorable="d" 
+        d:DesignHeight="200" d:DesignWidth="650"
+        Title="IEZoom" Width="{Binding Width, Mode=TwoWay}" Height="{Binding Height, Mode=TwoWay}">
     
     <ev:ViewBase.DataContext>
         <vm:IEZoomViewModel />

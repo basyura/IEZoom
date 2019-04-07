@@ -11,6 +11,19 @@ namespace IEZoom.Models
     {
         /// <summary></summary>
         private static readonly string _settingsPath;
+        /// <summary></summary>
+        public double Width = 650;
+        /// <summary></summary>
+        public double Height = 200;
+        /// <summary></summary>
+        public int Percent = 82;
+        /// <summary></summary>
+        public string Filter = "";
+        /// <summary></summary>
+        public bool IsAutoZoom = false;
+        /// <summary></summary>
+        [JsonIgnore]
+        public bool IsChanged { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -25,15 +38,6 @@ namespace IEZoom.Models
         private Settings()
         {
         }
-        /// <summary></summary>
-        public int Percent = 82;
-        /// <summary></summary>
-        public string Filter = "";
-        /// <summary></summary>
-        public bool IsAutoZoom = false;
-        /// <summary></summary>
-        [JsonIgnore]
-        public bool IsChanged { get; set; }
         /// <summary>
         /// 
         /// </summary>
