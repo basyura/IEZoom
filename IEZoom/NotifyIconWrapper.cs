@@ -54,7 +54,10 @@ namespace IEZoom
             {
                 return;
             }
+
             View.Visibility = Visibility.Visible;
+            View.Topmost = true;
+            Application.Current.Dispatcher.BeginInvoke(new Action(() => { View.Topmost = false; }));
         }
         /// <summary>
         /// 
