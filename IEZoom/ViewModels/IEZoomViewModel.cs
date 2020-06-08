@@ -28,6 +28,7 @@ namespace IEZoom.ViewModels
             };
             _timer.Tick += (s, e) =>
             {
+                Refresh();
                 if (IsAutoZoom)
                 {
                     ExecuteCommand("AutoZoom");

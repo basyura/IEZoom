@@ -5,14 +5,14 @@ using IEZoom.Models;
 
 namespace IEZoom.Actions.IEZoom
 {
-    public class AutoZoom : IEZoomActionBase
+    public class Full : IEZoomActionBase
     {
         public override Task<ActionResult> Execute(object sender, EventArgs e, object obj)
         {
-            foreach(Ie ie in ViewModel.InternetExplorers)
-            {
-                ie.Zoom(ViewModel.Percent);
-            }
+
+            Ie ie = ViewModel.SelectedItem;
+
+            ie.Zoom(100);
 
             return SuccessTask;
         }
