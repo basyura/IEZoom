@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Windows.Threading;
@@ -102,6 +105,88 @@ namespace IEZoom.ViewModels
                 filter = new Regex(Filter);
             }
 
+
+            List<object> targets = new List<object>();
+            var source = new CancellationTokenSource();
+            source.CancelAfter(3000);
+            Task t = Task.Factory.StartNew(() =>
+            {
+                foreach (object window in new ShellWindows())
+                {
+                    targets.Add(window);
+                }
+            }, source.Token);
+
+            try
+            {
+                t.Wait(source.Token);
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+
+
+            source = new CancellationTokenSource();
+            source.CancelAfter(3000);
+
+
+            List<Ie> list = new List<Ie>();
+
+
+            t = Task.Factory.StartNew(() =>
+            {
+
+                foreach (object window in targets)
+                {
+                    try
+                    {
+                        if (!(window is InternetExplorer ie))
+                        {
+                            continue;
+                        }
+
+                        if (!(ie.Document is HTMLDocument doc))
+                        {
+                            continue;
+                        }
+
+                        if (filter != null && !filter.IsMatch(ie.LocationURL))
+                        {
+                            continue;
+                        }
+
+
+                        list.Add(new Ie(ie));
+                    }
+                    catch (Exception e)
+                    {
+                    }
+                }
+            }, source.Token);
+
+            try
+            {
+                t.Wait(source.Token);
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+
+            list.ForEach(InternetExplorers.Add);
+
+            SaveSettings();
+
+            /*
+            InternetExplorers.Clear();
+
+            Regex filter = null;
+            if (!string.IsNullOrEmpty(Filter))
+            {
+                filter = new Regex(Filter);
+            }
+
             foreach (object window in new ShellWindows())
             {
                 try
@@ -130,6 +215,7 @@ namespace IEZoom.ViewModels
             }
 
             SaveSettings();
+            */
         }
         /// <summary>
         /// 
