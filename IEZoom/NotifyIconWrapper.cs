@@ -56,14 +56,8 @@ namespace IEZoom
             }
 
             View.Visibility = Visibility.Visible;
-            View.Topmost = true;
-            View.Height -= 1;
             View.UpdateLayout();
-            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
-            {
-                View.Topmost = false;
-                View.Height += 1;
-            }));
+            View.Activate();
         }
         /// <summary>
         /// 
