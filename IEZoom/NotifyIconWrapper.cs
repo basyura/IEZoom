@@ -56,7 +56,10 @@ namespace IEZoom
             }
 
             View.Visibility = Visibility.Visible;
-            View.UpdateLayout();
+            if (View.WindowState == WindowState.Minimized)
+            {
+                View.WindowState = WindowState.Normal;
+            }
             View.Activate();
         }
         /// <summary>
